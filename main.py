@@ -1,17 +1,20 @@
 import json
+from datetime import timedelta
+from os import closerange
+
 import requests
 import csv
 import datetime as dt
 
-response = requests.get("https://api.coingecko.com/api/v3/simple/price?ids=bitcoin&vs_currencies=usd")
+response = requests.get("https://api.coingecko.com/api/v3/simple/price?ids=ethereum&vs_currencies=usd")
 prices = response.json()
 
-# Parse the bitcoin price for use
+# Parse the ethereum price for use
 for coin, price in prices.items():
-    btc_price = price['usd']
+    eth_price = price['usd']
 
 # Current time
-curr_time = dt.datetime.now()
+__curr_time = dt.datetime.now()
 
 
 def log_price(time_stamp: object, price: float) -> None:
@@ -30,34 +33,47 @@ def log_price(time_stamp: object, price: float) -> None:
     formatted_time = time_stamp.strftime("%Y-%m-%dT%H:%M:%S")
     coin_price = [formatted_time, price]
 
-    with open("prices.csv", "a", newline="") as price_file:
+    with open("price.csv", "a", newline="") as price_file:
         price_writer = csv.writer(price_file)
         price_writer.writerow(coin_price)
 
 
 
-def signal_call(curr_time: object, ) -> None:
-    """
-    Reads the csv file, finds the row with the timestamp ~24 hours ago
-    Calculates the price change and prints the results
+def signal_call(curr_time: dt.datetime) -> None:
+    closest_time_stamp = None
+    closest_time_diff = None
+    closest_price = None
 
-    Args:
-        curr_time (obj): current local time
+    target_time = curr_time - timedelta(hours=24)
+    print(f"Current time: {curr_time}")
+    print(f"Target time (24 hours ago): {target_time}")
 
-    Returns:
-        None
-    """
+    with open("price.csv", newline="") as price_file:
+        csv_reader = csv.reader(price_file)
+        next(csv_reader)  # Skip header
 
-    with open("prices.csv", newline="") as price_file:
-        time_reader = csv.reader(price_file)
-        next(time_reader) # Skip column names header
-        for time_stamp in time_reader:
-            dt.datetime.strptime(time_stamp[0], "%Y-%m-%dT%H:%M:%S")
-            print(time_stamp[0])
+        for row in csv_reader:
+            row_time = dt.datetime.strptime(row[0], "%Y-%m-%dT%H:%M:%S")
+            time_diff = abs(row_time - target_time)
+
+            print(f"Row time: {row_time}, Difference: {time_diff}")
+
+            if closest_time_diff is None or time_diff < closest_time_diff:
+                closest_time_diff = time_diff
+                closest_time_stamp = row[0]
+                closest_price = row[1]
+
+    if closest_time_stamp:
+        print(f"Closest timestamp to 24h ago: {closest_time_stamp}")
+        print(f"Closest price: {closest_price}")
+    else:
+        print("No price data available.")
 
 
 
 
 
-#log_price(curr_time, btc_price)
-signal_call(curr_time)
+#log_price(__curr_time, eth_price)
+signal_call(__curr_time)
+
+
