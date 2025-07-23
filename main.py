@@ -3,6 +3,7 @@ import requests
 import csv
 import datetime as dt
 import time
+from plyer import notification
 
 try:
     while True:
@@ -78,11 +79,11 @@ try:
             displayed_percent_change = abs(percent_change)  # Removes the negative sign from the percentage drop message
             displayed_percent_change = format(displayed_percent_change, ".1f")  # Don't need the output to display decimals past the tenths place
 
-            if percent_change <= -5:
-                print(f"BUY SIGNAL: Ether dropped more than {displayed_percent_change}% in 24 hours")
+            if percent_change <= -1:
+                notification.notify(title="BUY SIGNAL", message=f"Ether price dropped more than {displayed_percent_change}% in 24 hours")
 
             elif percent_change <= -20:
-                print(f"CRASH: Ether dropped more than {displayed_percent_change}% in 24 hours")
+                notification.notify(title="CRASH", message=f"Ether price cratered by {displayed_percent_change}% in 24 hours")
 
         log_price(__curr_time, eth_price)
         price_signal(__curr_time, eth_price)
