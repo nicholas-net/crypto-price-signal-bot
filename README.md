@@ -1,1 +1,1 @@
-# crypto-price-signal-bot
+# ethereum-price-signal-bot
