@@ -39,13 +39,14 @@ def log_price(time_stamp: object, price: float) -> None:
 
 
 
-def signal_call(curr_time: dt.datetime) -> None:
+def price_signal(curr_time: dt.datetime, curr_price: float) -> None:
     """
-    Calculates the difference between the current price and yesterdays price (24 hours ago).
-    Prints out the percentage price change to the console
+    Calculates the difference between the current price and yesterday's price (24 hours ago).
+    Prints out a signal to the console if the price has dropped to a certain percentage
 
     Args:
         curr_time (datetime): datetime object represents the current time
+        curr_price (float): the current price that 1 ethereum is worth
 
     Returns:
         None
@@ -80,10 +81,22 @@ def signal_call(curr_time: dt.datetime) -> None:
         print("No price data available.")
 
 
+    old_price = closest_price
+
+    old_price = float(old_price)
+    percent_change = ((curr_price - old_price) / old_price) * 100
+    displayed_percent_change = abs(percent_change)  # Removes the negative sign from the percentage drop message
+    displayed_percent_change = format(displayed_percent_change, ".1f")  # Don't need the output to display decimals past the tenths place
+
+    if percent_change <= -1:
+        print(f"BUY SIGNAL: Price dropped more than {displayed_percent_change}% in 24 hours")
+
+    elif percent_change <= -20:
+        print(f"CRASH: Price dropped more than {displayed_percent_change}% in 24 hours")
 
 
 
 #log_price(__curr_time, eth_price)
-signal_call(__curr_time)
+price_signal(__curr_time, eth_price)
 
 
