@@ -40,6 +40,16 @@ def log_price(time_stamp: object, price: float) -> None:
 
 
 def signal_call(curr_time: dt.datetime) -> None:
+    """
+    Calculates the difference between the current price and yesterdays price (24 hours ago).
+    Prints out the percentage price change to the console
+
+    Args:
+        curr_time (datetime): datetime object represents the current time
+
+    Returns:
+        None
+    """
     closest_time_stamp = None
     closest_time_diff = None
     closest_price = None
