@@ -78,10 +78,10 @@ if __name__ == "__main__":
                 displayed_percent_change = abs(percent_change)  # Removes the negative sign from the percentage drop message.
                 displayed_percent_change = format(displayed_percent_change, ".1f")  # Don't need the output to display decimals past the tenths place.
 
-                if percent_change <= -5:
+                if percent_change <= -15:
                     notification.notify(title="BUY SIGNAL", message=f"Ether price dropped more than {displayed_percent_change}% in 24 hours")
 
-                elif percent_change <= -20:
+                elif percent_change >= 15:
                     notification.notify(title="CRASH", message=f"Ether price cratered by {displayed_percent_change}% in 24 hours")
 
             log_price(__curr_time, eth_price)
