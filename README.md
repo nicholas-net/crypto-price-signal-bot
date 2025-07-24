@@ -38,6 +38,11 @@
 <!-- ABOUT THE PROJECT -->
 ## About The Project
 
+Back in 2020, I mined some Ethereum and pretty much forgot about it. Turns out my MetaMask wallet’s been sitting on a decent gain—but I haven’t been keeping up with the market. I decided this was the perfect opportunity to sharpen my Python skills and get some hands-on experience with automation. That’s what spawned this project: a bot that watches the price for me. If Ethereum tanks or takes off, I get a desktop pop-up notification so I can decide whether to cash in or bail before it’s too late.
+
+In the future, I might expand it to track multiple coins (if I buy them) or send alerts to my phone via text or email.
+
+
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
 
@@ -90,6 +95,9 @@ To get a local copy up and running follow these steps! 📝
 
 <!-- USAGE EXAMPLES -->
 ## Usage
+
+Once the script is running, it fetches the Ethereum price every 10 minutes. If the price has dropped significantly in the past 24 hours, a desktop notification will appear with the signal 
+
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
