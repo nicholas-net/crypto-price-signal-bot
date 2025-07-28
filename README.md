@@ -3,7 +3,7 @@
 <!-- PROJECT LOGO -->
 <br />
 
-<h3 align="center">Ethereum Price Alert Bot 🚨</h3>
+<h1 align="center">Ethereum Price Alert Bot 🚨</h1>
 
   <p align="center">
     Monitors Ethereum price fluctuations and sends desktop notifications for significant crashes 📉 or spikes 🚀
