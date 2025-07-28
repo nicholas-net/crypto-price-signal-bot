@@ -96,7 +96,7 @@ To get a local copy up and running follow these steps! 📝
 <!-- USAGE EXAMPLES -->
 ## Usage
 
-Once the script is running, it fetches the Ethereum price every 10 minutes. If the price has dropped significantly in the past 24 hours, a desktop notification will appear with the signal 
+Once the script is running, it fetches the Ethereum price every 10 minutes. If the price has dropped significantly in the past 24 hours, a desktop notification will appear with the signal. The file `price.csv` is generated dynamically by the bot every 10 minutes and **is not tracked** in this repository.
 
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
