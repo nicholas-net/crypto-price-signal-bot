@@ -1,3 +1,6 @@
 venv/
 price.csv
+__pycache__/
+*.pyc
+.env
 
